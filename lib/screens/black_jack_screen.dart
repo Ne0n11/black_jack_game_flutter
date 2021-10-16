@@ -126,10 +126,22 @@ class _BlackJackScreenState extends State<BlackJackScreen> {
       dealerCards.add(Image.asset(thirdDealerCardKey));
       dealerScore+= deckOfCards[thirdDealerCardKey]!;
     }
+    checkWin();
+  }
 
+  void checkWin(){
+    if(dealerScore > 21){
+      print("Player won");
+    }else if(playerScore >21){
+      print("Dealer won");
+    } else if(playerScore >= dealerScore){
+      print("Player won");}
+      else {print ("Dealer won");
+    }
   }
 
   void addCard(){
+    checkWin();
     if(playingCards.isNotEmpty) {
       String cardKey = playingCards.keys.elementAt(
           random.nextInt(playingCards.length));
@@ -203,6 +215,11 @@ class _BlackJackScreenState extends State<BlackJackScreen> {
                       child: const Text("Next round"),
                       color: Colors.brown[200],
                       onPressed: changeCards,
+                    ),
+                    MaterialButton(
+                      child: const Text("Stay"),
+                      color: Colors.brown[200],
+                      onPressed: checkWin,
                     ),
                   ],
                 ),
